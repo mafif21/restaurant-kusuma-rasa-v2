@@ -378,6 +378,14 @@ button {
   gap: 14px;
 }
 
+.menu-group-header {
+  width: fit-content;
+  border: 1px solid rgba(255, 212, 0, 0.16);
+  border-radius: 999px;
+  padding: 10px 14px;
+  background: linear-gradient(135deg, rgba(255, 195, 0, 0.12), rgba(255, 95, 0, 0.1));
+}
+
 .record-card,
 .order-preview-card,
 .drawer-item-card {
@@ -686,11 +694,7 @@ button {
   }
 
   .drawer-header {
-    position: sticky;
-    top: 0;
-    z-index: 1;
     padding-top: 4px;
-    background: linear-gradient(180deg, rgba(36, 19, 14, 0.98), rgba(36, 19, 14, 0.9));
   }
 
   .drawer-header .ghost-button {
@@ -698,12 +702,12 @@ button {
   }
 
   .animated-total {
-    padding: 16px;
+    padding: 14px 16px;
     border-radius: 20px;
   }
 
   .animated-total strong {
-    font-size: 2rem;
+    font-size: 1.55rem;
   }
 
   .drawer-body {
@@ -713,19 +717,21 @@ button {
   }
 
   .menu-group {
-    gap: 10px;
+    gap: 12px;
   }
 
   .menu-group-header {
-    position: sticky;
-    top: 0;
-    z-index: 1;
-    padding: 8px 0;
-    background: linear-gradient(180deg, rgba(36, 19, 14, 0.98), rgba(36, 19, 14, 0.82));
+    margin-bottom: 2px;
+    padding: 10px 14px;
+  }
+
+  .menu-group-header h3 {
+    margin: 0;
+    font-size: 0.98rem;
   }
 
   .drawer-item-card {
-    padding: 14px;
+    padding: 16px 14px;
     border-radius: 18px;
     align-items: center;
     justify-content: space-between;
@@ -751,11 +757,17 @@ button {
 
   .quantity-control {
     flex: 0 0 50%;
+    gap: 10px;
   }
 
   .quantity-control input {
     width: 56px;
-    min-height: 42px;
+    min-height: 46px;
+  }
+
+  .icon-button {
+    width: 46px;
+    height: 46px;
   }
 
   .drawer-footer {
