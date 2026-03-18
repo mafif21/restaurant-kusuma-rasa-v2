@@ -3,6 +3,11 @@
 import { useEffect, useState } from "react";
 import { ListTree, ReceiptText, UtensilsCrossed } from "lucide-react";
 import { formatCurrency } from "@/lib/date";
+import {
+  getCategoriesFromBrowser,
+  getDailyRecapFromBrowser,
+  getMenuItemsFromBrowser
+} from "@/lib/browser-store";
 import type { Category, DailyRecap, MenuItem } from "@/lib/types";
 
 export function DashboardHome() {
@@ -12,26 +17,14 @@ export function DashboardHome() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    async function load() {
-      const [categoriesResponse, menuResponse, recapResponse] = await Promise.all([
-        fetch("/api/categories"),
-        fetch("/api/menu"),
-        fetch("/api/transactions")
-      ]);
-
-      const [categoriesData, menuData, recapData] = await Promise.all([
-        categoriesResponse.json(),
-        menuResponse.json(),
-        recapResponse.json()
-      ]);
-
-      setCategories(categoriesData);
-      setMenuItems(menuData);
-      setRecap(recapData);
+    function load() {
+      setCategories(getCategoriesFromBrowser());
+      setMenuItems(getMenuItemsFromBrowser());
+      setRecap(getDailyRecapFromBrowser());
       setLoading(false);
     }
 
-    void load();
+    load();
   }, []);
 
   const stats = [
@@ -118,8 +111,8 @@ export function DashboardHome() {
           </div>
           <ul className="insight-list">
             <li>Hardcoded login protects all CMS routes with cookie-based session checks.</li>
-            <li>Categories and menu pricing persist into local JSON files under `data/`.</li>
-            <li>Transactions append into dated recap files under `recap/` for later backend migration.</li>
+            <li>Menu, category, and recap data persist in browser localStorage for Vercel-safe frontend mocks.</li>
+            <li>Seed JSON under `data/` is used as the first-load fallback before backend integration.</li>
           </ul>
         </article>
       </section>

@@ -4,6 +4,12 @@ import { useEffect, useState } from "react";
 import { jsPDF } from "jspdf";
 import { CalculatorDrawer } from "@/components/calculator-drawer";
 import { formatCurrency, formatDateTime } from "@/lib/date";
+import {
+  appendTransactionInBrowser,
+  getCategoriesFromBrowser,
+  getDailyRecapFromBrowser,
+  getMenuItemsFromBrowser
+} from "@/lib/browser-store";
 import type { Category, DailyRecap, MenuItem } from "@/lib/types";
 
 export function TransactionsManager() {
@@ -16,17 +22,9 @@ export function TransactionsManager() {
 
   async function loadData() {
     setLoading(true);
-    const [menuResponse, categoriesResponse, recapResponse] = await Promise.all([
-      fetch("/api/menu"),
-      fetch("/api/categories"),
-      fetch("/api/transactions")
-    ]);
-
-    const [menuData, categoriesData, recapData] = await Promise.all([
-      menuResponse.json(),
-      categoriesResponse.json(),
-      recapResponse.json()
-    ]);
+    const menuData = getMenuItemsFromBrowser();
+    const categoriesData = getCategoriesFromBrowser();
+    const recapData = getDailyRecapFromBrowser();
 
     setMenuItems(menuData);
     setCategories(categoriesData);
@@ -38,8 +36,9 @@ export function TransactionsManager() {
     void loadData();
   }, []);
 
-  async function handleConfirm() {
+  async function handleConfirmOrder(items: Array<{ menuItemId: string; quantity: number }>) {
     setSubmitting(true);
+    appendTransactionInBrowser(items);
     await loadData();
     setSubmitting(false);
   }
@@ -163,7 +162,7 @@ export function TransactionsManager() {
         menuItems={menuItems}
         categories={categories}
         onClose={() => setDrawerOpen(false)}
-        onConfirm={handleConfirm}
+        onConfirmOrder={handleConfirmOrder}
         submitting={submitting}
       />
     </section>

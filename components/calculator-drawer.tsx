@@ -13,7 +13,7 @@ type CalculatorDrawerProps = {
   menuItems: MenuItem[];
   categories: Category[];
   onClose: () => void;
-  onConfirm: () => Promise<void>;
+  onConfirmOrder: (items: Array<{ menuItemId: string; quantity: number }>) => Promise<void>;
   submitting: boolean;
 };
 
@@ -22,7 +22,7 @@ export function CalculatorDrawer({
   menuItems,
   categories,
   onClose,
-  onConfirm,
+  onConfirmOrder,
   submitting
 }: CalculatorDrawerProps) {
   const [quantities, setQuantities] = useState<QuantityMap>({});
@@ -67,13 +67,7 @@ export function CalculatorDrawer({
     setLocalSubmitting(true);
 
     try {
-      await fetch("/api/transactions", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ items })
-      });
-
-      await onConfirm();
+      await onConfirmOrder(items);
       onClose();
     } finally {
       setLocalSubmitting(false);

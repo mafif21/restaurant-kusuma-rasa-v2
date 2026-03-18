@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
+import { getCategoriesFromBrowser, saveCategoriesToBrowser } from "@/lib/browser-store";
 import type { Category } from "@/lib/types";
 
 const initialForm = { name: "", description: "", color: "#f59e0b" };
@@ -14,8 +15,7 @@ export function CategoriesManager() {
 
   async function loadCategories() {
     setLoading(true);
-    const response = await fetch("/api/categories");
-    setCategories(await response.json());
+    setCategories(getCategoriesFromBrowser());
     setLoading(false);
   }
 
@@ -25,14 +25,23 @@ export function CategoriesManager() {
 
   async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
-    const url = editingId ? `/api/categories/${editingId}` : "/api/categories";
-    const method = editingId ? "PUT" : "POST";
+    const currentCategories = getCategoriesFromBrowser();
+    const nextCategories = editingId
+      ? currentCategories.map((category) =>
+          category.id === editingId ? { ...category, ...form } : category
+        )
+      : [
+          ...currentCategories,
+          {
+            id: crypto.randomUUID(),
+            name: form.name,
+            description: form.description,
+            color: form.color,
+            createdAt: new Date().toISOString()
+          }
+        ];
 
-    await fetch(url, {
-      method,
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(form)
-    });
+    saveCategoriesToBrowser(nextCategories);
 
     setForm(initialForm);
     setEditingId(null);
@@ -40,7 +49,7 @@ export function CategoriesManager() {
   }
 
   async function handleDelete(id: string) {
-    await fetch(`/api/categories/${id}`, { method: "DELETE" });
+    saveCategoriesToBrowser(getCategoriesFromBrowser().filter((category) => category.id !== id));
     await loadCategories();
   }
 

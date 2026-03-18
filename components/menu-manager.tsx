@@ -1,6 +1,11 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import {
+  getCategoriesFromBrowser,
+  getMenuItemsFromBrowser,
+  saveMenuItemsToBrowser
+} from "@/lib/browser-store";
 import type { Category, MenuItem } from "@/lib/types";
 import { formatCurrency } from "@/lib/date";
 
@@ -15,14 +20,8 @@ export function MenuManager() {
 
   async function loadData() {
     setLoading(true);
-    const [menuResponse, categoriesResponse] = await Promise.all([
-      fetch("/api/menu"),
-      fetch("/api/categories")
-    ]);
-    const [menuData, categoriesData] = await Promise.all([
-      menuResponse.json(),
-      categoriesResponse.json()
-    ]);
+    const menuData = getMenuItemsFromBrowser();
+    const categoriesData = getCategoriesFromBrowser();
 
     setMenuItems(menuData);
     setCategories(categoriesData);
@@ -39,14 +38,24 @@ export function MenuManager() {
 
   async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
-    const url = editingId ? `/api/menu/${editingId}` : "/api/menu";
-    const method = editingId ? "PUT" : "POST";
+    const currentMenu = getMenuItemsFromBrowser();
+    const nextMenu = editingId
+      ? currentMenu.map((item) =>
+          item.id === editingId ? { ...item, ...form, value: Number(form.value) } : item
+        )
+      : [
+          ...currentMenu,
+          {
+            id: crypto.randomUUID(),
+            key: form.key,
+            name: form.name,
+            value: Number(form.value),
+            categoryId: form.categoryId,
+            createdAt: new Date().toISOString()
+          }
+        ];
 
-    await fetch(url, {
-      method,
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ ...form, value: Number(form.value) })
-    });
+    saveMenuItemsToBrowser(nextMenu);
 
     setEditingId(null);
     setForm({ ...initialForm, categoryId: categories[0]?.id || "" });
@@ -54,7 +63,7 @@ export function MenuManager() {
   }
 
   async function handleDelete(id: string) {
-    await fetch(`/api/menu/${id}`, { method: "DELETE" });
+    saveMenuItemsToBrowser(getMenuItemsFromBrowser().filter((item) => item.id !== id));
     await loadData();
   }
 
