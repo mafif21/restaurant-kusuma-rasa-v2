@@ -1,0 +1,16 @@
+[
+  {
+    "id": "cat-mains",
+    "name": "Main Course",
+    "description": "Signature rice plates and house specialties.",
+    "color": "#f59e0b",
+    "createdAt": "2026-03-18T12:00:00.000Z"
+  },
+  {
+    "id": "cat-drinks",
+    "name": "Beverages",
+    "description": "Fresh teas, coffee, and iced drinks.",
+    "color": "#7c2d12",
+    "createdAt": "2026-03-18T12:00:00.000Z"
+  }
+]

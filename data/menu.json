@@ -1,0 +1,122 @@
+[
+  {
+    "id": "menu-lele",
+    "key": "lele",
+    "name": "Pecel Lele",
+    "value": 18000,
+    "categoryId": "cat-mains",
+    "createdAt": "2026-03-18T12:00:00.000Z"
+  },
+  {
+    "id": "menu-sidedish",
+    "key": "sidedish",
+    "name": "Tempe, Tahu, Terong, Pete",
+    "value": 10000,
+    "categoryId": "cat-mains",
+    "createdAt": "2026-03-18T12:00:00.000Z"
+  },
+  {
+    "id": "menu-ayam",
+    "key": "ayam",
+    "name": "Ayam",
+    "value": 28000,
+    "categoryId": "cat-mains",
+    "createdAt": "2026-03-18T12:00:00.000Z"
+  },
+  {
+    "id": "menu-dara",
+    "key": "dara",
+    "name": "Dara",
+    "value": 55000,
+    "categoryId": "cat-mains",
+    "createdAt": "2026-03-18T12:00:00.000Z"
+  },
+  {
+    "id": "menu-bebek-dada",
+    "key": "bebek-dada",
+    "name": "Bebek Dada",
+    "value": 60000,
+    "categoryId": "cat-mains",
+    "createdAt": "2026-03-18T12:00:00.000Z"
+  },
+  {
+    "id": "menu-bebek-paha",
+    "key": "bebek-paha",
+    "name": "Bebek Dada Paha",
+    "value": 55000,
+    "categoryId": "cat-mains",
+    "createdAt": "2026-03-18T12:00:00.000Z"
+  },
+  {
+    "id": "menu-udang-cumi",
+    "key": "udang-cumi",
+    "name": "Udang / Cumi",
+    "value": 75000,
+    "categoryId": "cat-mains",
+    "createdAt": "2026-03-18T12:00:00.000Z"
+  },
+  {
+    "id": "menu-kepiting",
+    "key": "kepiting",
+    "name": "Kepiting",
+    "value": 175000,
+    "categoryId": "cat-mains",
+    "createdAt": "2026-03-18T12:00:00.000Z"
+  },
+  {
+    "id": "menu-nasi",
+    "key": "nasi",
+    "name": "Nasi",
+    "value": 5000,
+    "categoryId": "cat-mains",
+    "createdAt": "2026-03-18T12:00:00.000Z"
+  },
+  {
+    "id": "menu-es-teh",
+    "key": "teh",
+    "name": "Teh Manis",
+    "value": 5000,
+    "categoryId": "cat-drinks",
+    "createdAt": "2026-03-18T12:00:00.000Z"
+  },
+  {
+    "id": "menu-es-jeruk",
+    "key": "jeruk",
+    "name": "Jeruk Manis",
+    "value": 8000,
+    "categoryId": "cat-drinks",
+    "createdAt": "2026-03-18T12:00:00.000Z"
+  },
+  {
+    "id": "menu-es-tawar",
+    "key": "jeruk-teh-tawar",
+    "name": "Jeruk/Teh Tawar",
+    "value": 3000,
+    "categoryId": "cat-drinks",
+    "createdAt": "2026-03-18T12:00:00.000Z"
+  },
+  {
+    "id": "menu-kulkas",
+    "key": "kulkas",
+    "name": "Minuman Kulkas",
+    "value": 8000,
+    "categoryId": "cat-drinks",
+    "createdAt": "2026-03-18T12:00:00.000Z"
+  },
+  {
+    "id": "menu-air-mineral",
+    "key": "air-mineral",
+    "name": "Air Mineral",
+    "value": 5000,
+    "categoryId": "cat-drinks",
+    "createdAt": "2026-03-18T12:00:00.000Z"
+  },
+  {
+    "id": "849fc77a-eefc-4928-bd60-88ea00eb6e9e",
+    "key": "menu-kangkung",
+    "name": "Kangkung",
+    "value": 10000,
+    "categoryId": "cat-mains",
+    "createdAt": "2026-03-18T14:07:55.223Z"
+  }
+]
