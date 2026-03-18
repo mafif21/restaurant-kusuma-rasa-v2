@@ -9,6 +9,10 @@
   --accent: #f59e0b;
   --accent-strong: #ea580c;
   --shadow: 0 24px 60px rgba(0, 0, 0, 0.28);
+  --font-body:
+    "Inter", "Segoe UI", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  --font-heading:
+    "Playfair Display", Georgia, "Times New Roman", Times, serif;
 }
 
 * {

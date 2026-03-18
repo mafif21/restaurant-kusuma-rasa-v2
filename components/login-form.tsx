@@ -2,7 +2,10 @@
 
 import { useState, useTransition } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
+import type { Route } from "next";
 import { motion } from "framer-motion";
+
+const allowedRoutes: Route[] = ["/dashboard", "/categories", "/menu", "/transactions"];
 
 export function LoginForm() {
   const [username, setUsername] = useState("atun");
@@ -28,7 +31,9 @@ export function LoginForm() {
         return;
       }
 
-      router.push(searchParams.get("next") ?? "/dashboard");
+      const nextPath = searchParams.get("next");
+      const targetRoute = allowedRoutes.find((route) => route === nextPath) ?? "/dashboard";
+      router.push(targetRoute);
       router.refresh();
     });
   }

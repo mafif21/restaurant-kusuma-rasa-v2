@@ -1,10 +1,11 @@
 "use client";
 
+import type { Route } from "next";
 import { usePathname, useRouter } from "next/navigation";
 import { LayoutDashboard, ListTree, LogOut, ScrollText, UtensilsCrossed } from "lucide-react";
 import { AnimatePresence, motion } from "framer-motion";
 
-const navItems = [
+const navItems: Array<{ href: Route; label: string; icon: typeof LayoutDashboard }> = [
   { href: "/dashboard", label: "Dashboard", icon: LayoutDashboard },
   { href: "/categories", label: "Category", icon: ListTree },
   { href: "/menu", label: "Menu", icon: UtensilsCrossed },
